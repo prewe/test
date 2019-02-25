@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+    height: 800px;
+}
+
+td {
+    background: rgb(196, 185, 185);
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.red {
+    background: red;
+}
