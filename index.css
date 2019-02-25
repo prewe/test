@@ -3,12 +3,29 @@ table {
     height: 800px;
 }
 
+th {
+    background: rgb(134, 233, 225);
+}
+
 td {
     background: rgb(196, 185, 185);
     text-align: right;
     vertical-align: bottom;
 }
 
+
+
+.black {
+    background: rgb(127, 136, 219);
+}
+
 .red {
-    background: red;
+    background: rgb(211, 145, 145);
+}
+
+.prev,
+.next {
+    width: 100px;
+    height: 50px;
+    border: 1px solid blue;
 }
