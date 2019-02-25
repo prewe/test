@@ -167,7 +167,7 @@
         $('#search').val($.trim(click_text[0]));
         $("#result").html('');
         $.get(
-          "http://api.openweathermap.org/data/2.5/weather",
+          "https://api.openweathermap.org/data/2.5/weather",
           {
             "id" : $(this).attr('value'),
             "appid": "70e1ed322b02acbc57d443dd91065f3e"
