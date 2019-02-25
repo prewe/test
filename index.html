@@ -9,7 +9,7 @@
 </head>
 <body>
     
-    <div class="container">
+  <div class="container">
 		<div class="calendar__header">
 			<div class="prev" onclick="prev()">Prev</div>
 			<div class="month-and-year"></div>
@@ -72,6 +72,7 @@
     
           d.setDate(d.getDate() + 1);
         }
+        console.log(d.getMonth());
 
           
     
@@ -102,10 +103,9 @@
 
         tbl.addEventListener('click', function(event){
           let target = event.target;
+          
 
-              
-
-          if (target.tagName != 'TD') return;
+          if (target.tagName != 'TD' || !target.innerHTML) return;
           highlight(target);
         });
 
