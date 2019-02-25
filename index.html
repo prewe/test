@@ -16,16 +16,22 @@
 			<div class="next" onclick="next()">Next</div>
 		</div>
 		
-		<div id="calendar" class="calendar"></div>
+    <div id="calendar" class="calendar"></div>
+    
+    <div class="todo">
+      <input type="text" name="search" id="search" placeholder="ghjdgahj" class="search">
+      <ul id="result"></ul>
+    </div>
 	</div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
 
 		  let today = new Date();
 			let currMonth = today.getMonth();
 			let currYear = today.getFullYear();
 			let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      console.log(today.getDay());
 
 			createCalendar("calendar", currYear, currMonth);
 			monthAndYear();
@@ -72,7 +78,7 @@
     
           d.setDate(d.getDate() + 1);
         }
-        console.log(d.getMonth());
+        
 
           
     
@@ -138,6 +144,41 @@
           showCalendar(currentMonth, currentYear);
         }
       }
+
+      $(document).ready(function(){
+        $('#search').keyup(function(){
+          $('#result').html('');
+          var searchField = $('#search').val();
+          var expression = new RegExp(searchField, "i");
+          $.getJSON('city.list.json', function(data){
+            $.each(data, function(key, value){
+              if (value.name.search(expression) != -1 )
+              {
+                $('#result').append('<li class="list-group-item" width="40" height="40" value="' + value.id + '">' + value.name + '</li>');
+              }
+            });
+          });
+        });
+      });
+
+      $('#result').on('click', 'li', function() {
+        var click_text = $(this).text().split('|');
+        console.log(click_text);
+        $('#search').val($.trim(click_text[0]));
+        $("#result").html('');
+        $.get(
+          "http://api.openweathermap.org/data/2.5/weather",
+          {
+            "id" : $(this).attr('value'),
+            "appid": "70e1ed322b02acbc57d443dd91065f3e"
+          },
+            function (data) {
+              let out = '';
+              out += '<b>' + data.main.temp + '</b>'
+              console.log(out);
+            }
+        );
+      });
 
 			
  
