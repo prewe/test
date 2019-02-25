@@ -9,19 +9,42 @@
 </head>
 <body>
     
-    <div class="prev">prev</div>
-    <div class="next">next</div>
-
-    <div id="calendar"></div>
+    <div class="container">
+		<div class="calendar__header">
+			<div class="prev" onclick="prev()">prev</div>
+			<div class="next" onclick="next()">next</div>
+		</div>
+		
+		<div id="calendar" class="calendar"></div>
+	</div>
 
 
     <script>
+		let today = new Date();
+		let currMonth = today.getMonth();
+		let currYear = today.getFullYear();
+		let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+		createCalendar("calendar", currYear, currMonth);
+
+		function prev() {
+			currYear = (currMonth === 0) ? currYear - 1 : currYear;
+			currMonth = (currMonth === 0) ? 11 : currMonth - 1;
+			createCalendar("calendar", currYear, currMonth);
+		}
+
+		function next() {
+			currYear = (currMonth === 11) ? currYear + 1 : currYear;
+			currMonth = (currMonth + 1) % 12;
+			createCalendar("calendar", currYear, currMonth);
+		}
+
         function createCalendar(id, year, month) {
           var elem = document.getElementById(id);
-          var currMonth = month;
+        //   var currMonth = month;
           
     
-          var mon = month - 1; // месяцы в JS идут от 0 до 11, а не от 1 до 12
+          var mon = month; // месяцы в JS идут от 0 до 11, а не от 1 до 12
           var d = new Date(year, mon);
     
           var table = '<table><tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr><tr>';
@@ -89,12 +112,19 @@
             }
           });
 
-          let prevBtn = document.querySelector('prev');
-          let nextBtn = document.querySelector('next');
+          
 
-          prevBtn.addEventListener('click', function(){
-            month--;
-          });
+          function next() {
+              currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+              currentMonth = (currentMonth + 1) % 12;
+              showCalendar(currentMonth, currentYear);
+          }
+
+          function prev() {
+              currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+              currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+              showCalendar(currentMonth, currentYear);
+          }
         }
 
         
@@ -107,7 +137,7 @@
     
     
     
-        createCalendar("calendar", 2019, 2)
+        
 
         
 
