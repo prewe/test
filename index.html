@@ -150,6 +150,7 @@
           $('#result').html('');
           var searchField = $('#search').val();
           var expression = new RegExp(searchField, "i");
+          
           $.getJSON('city.list.json', function(data){
             $.each(data, function(key, value){
               if (value.name.search(expression) != -1 )
@@ -166,6 +167,7 @@
         console.log(click_text);
         $('#search').val($.trim(click_text[0]));
         $("#result").html('');
+        
         $.get(
           "https://api.openweathermap.org/data/2.5/weather",
           {
