@@ -19,12 +19,14 @@
     <div id="calendar" class="calendar"></div>
     
     <div class="todo">
+      
       <input type="text" name="search" id="search" placeholder="ghjdgahj" class="search">
       <ul id="result"></ul>
     </div>
 	</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script>
 
 		  let today = new Date();
@@ -146,18 +148,21 @@
       }
 
       $(document).ready(function(){
-        $('#search').keyup(function(){
+        $('#search').keydown(function(){
           $('#result').html('');
           var searchField = $('#search').val();
           var expression = new RegExp(searchField, "i");
           
           $.getJSON('city.list.json', function(data){
+            let output = '';
+            
             $.each(data, function(key, value){
               if (value.name.search(expression) != -1 )
               {
-                $('#result').append('<li class="list-group-item" width="40" height="40" value="' + value.id + '">' + value.name + '</li>');
+                $('#result').append('<li class="list-group-item" width="40" height="40" value="' + value.id + '">' + value.name + '</li>');  
               }
             });
+            
           });
         });
       });
